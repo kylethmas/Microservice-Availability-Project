@@ -9,118 +9,79 @@ Welcome to the research project repository on enhancing fault tolerance and reso
 - [Why Fault Tolerance Matters](#why-fault-tolerance-matters)
 - [Research Goals](#research-goals)
 - [Proposed Solution](#proposed-solution)
-- [Expected Outcomes](#expected-outcomes)
-- [Key Insights](#key-insights)
+- [Expected Outcomes and Insights](#expected-outcomes-and-insights)
+- [Contact](#contact)
 
 ---
 
 ## 📖 **Introduction**
-Ensuring high availability and fault tolerance in Kubernetes-managed microservices is a critical challenge. Current polling-based monitoring mechanisms are reactive, slow, and resource-intensive. This research explores an innovative solution leveraging signal-based monitoring and hierarchical fault management to proactively detect and recover from failures in real-time.
+Ensuring high availability and fault tolerance in Kubernetes-managed microservices is a critical challenge. Current polling-based monitoring mechanisms are reactive, slow, and resource-intensive. This research pioneers the use of signal-based monitoring and hierarchical fault management, leveraging Erlang-inspired supervision trees to proactively detect and recover from failures in real time.
 
 ---
 
-<details>
-<summary>🛠️ <b>Why Fault Tolerance Matters</b></summary>
-
-Modern cloud-native applications power essential systems in **e-commerce**, **finance**, and **healthcare**, where even minimal downtime has significant consequences:
-- **E-commerce Example:** A service failure during a flash sale may cascade into lost revenue, customer dissatisfaction, and reputational damage.
-- **Healthcare Example:** Downtime in critical applications could jeopardize patient care and safety.
+## 💡 **Why Fault Tolerance Matters**
+Microservices underpin critical applications in **e-commerce**, **finance**, and **healthcare**, where downtime can lead to severe consequences:
+- **E-commerce Example:** Downtime during a flash sale can result in revenue loss and customer dissatisfaction.
+- **Healthcare Example:** Failures in critical systems can jeopardize patient safety.
 
 ### Limitations of Current Approaches:
-- **Polling Mechanisms:** Periodic health checks introduce delays proportional to polling intervals, resulting in reactive fault management.
-- **Resource Overhead:** Frequent polling increases CPU and network usage, making it unsuitable for large-scale, interdependent systems.
+- **Polling Mechanisms:** Reactive fault detection with delays proportional to polling intervals.
+- **Resource Overhead:** Frequent polling increases CPU and network usage, making it inefficient for large-scale systems.
 
-### Why Signal-Based Monitoring?
-Signal-based monitoring enables **real-time failure detection** and resource-efficient fault management:
-- Pods proactively send health signals to supervisors.
-- This eliminates the need for constant checks, reducing latency and overhead.
-
-</details>
+### Signal-Based Monitoring Advantages:
+- **Proactive Detection:** Pods send real-time health signals to supervisors.
+- **Reduced Latency:** Faster failure detection compared to polling-based methods.
+- **Efficient Scaling:** Lower CPU and RAM overhead, suitable for interdependent environments.
 
 ---
 
-<details>
-<summary>🎯 <b>Research Goals</b></summary>
-
-This project aims to redefine fault tolerance in Kubernetes-managed microservices by integrating Erlang-inspired **supervision trees** and **signal-based monitoring**. 
-
-### Key Goals:
-1. **Design Hierarchical Fault Management:** 
-   - Develop a Kubernetes Operator to manage failures using hierarchical supervision trees.
-   - Enable targeted recovery, reducing cascading failures.
-2. **Optimize Resource Usage:**
-   - Replace polling with signal-based monitoring, lowering CPU and RAM overhead.
-3. **Enhance Fault Tolerance at Scale:**
-   - Evaluate the model's performance in handling complex, interdependent microservice environments.
-4. **Practical Guidelines:** 
-   - Provide deployment best practices for real-world Kubernetes systems.
-
-These goals address current limitations in polling-based fault detection and highlight the scalability and efficiency of the proposed approach.
-
-</details>
+## 🎯 **Research Goals**
+This project redefines fault tolerance in Kubernetes-managed microservices by integrating signal-based monitoring and supervision trees. The goals include:
+1. **Design Hierarchical Fault Management:**
+   - Create a Kubernetes Operator with multi-level supervision trees.
+   - Improve fault isolation and recovery efficiency.
+2. **Optimize Resource Utilization:**
+   - Replace polling with real-time signal-based monitoring to lower CPU and RAM usage.
+3. **Enhance Scalability:**
+   - Evaluate performance in highly interdependent microservice environments.
+4. **Provide Practical Guidelines:**
+   - Develop actionable deployment recommendations for real-world Kubernetes systems.
 
 ---
 
-<details>
-<summary>💡 <b>Proposed Solution</b></summary>
+## 🛠️ **Proposed Solution**
+This research introduces a **Supervisory Model** for Kubernetes Operators based on Erlang’s supervision trees. Key components include:
 
-The proposed solution introduces a **Supervisory Model** for Kubernetes Operators based on Erlang’s supervision trees. 
-
-### Key Components:
 1. **Hierarchical Supervision Trees:**
-   - Supervisors monitor pods and other supervisors, isolating faults and preventing cascading failures.
-   - Multi-level supervision improves fault recovery and scalability.
+   - Supervisors monitor pods and isolate faults, preventing cascading failures.
+   - Multi-level structures improve fault recovery and scalability.
 
 2. **Signal-Based Monitoring:**
-   - Pods proactively signal their health status to supervisors, enabling near-instantaneous fault detection.
-   - This replaces resource-intensive polling with an event-driven approach.
+   - Replaces resource-heavy polling with event-driven health signals for near-instantaneous detection.
+   - Reduces latency and system overhead.
 
 3. **Targeted Recovery Strategies:**
-   - Automate fault recovery actions like pod restarts, resource reallocation, and dependency adjustments.
-   - Tailored recovery strategies improve Mean Time to Recovery (MTTR) and Service Level Objectives (SLOs).
-
-</details>
+   - Automates fault recovery, including pod restarts and resource reallocation.
+   - Tailored strategies minimize Mean Time to Recovery (MTTR) and improve Service Level Objectives (SLOs).
 
 ---
 
-<details>
-<summary>📊 <b>Expected Outcomes</b></summary>
+## 📊 **Expected Outcomes and Insights**
+### Key Outcomes:
+- **Improved Fault Isolation:** Targeted recovery strategies reduce cascading failures.
+- **Resource Savings:** Signal-based monitoring lowers CPU and RAM usage compared to polling.
+- **Scalability:** Efficiently handles large-scale systems with interdependent services.
+- **Real-World Applicability:** Deployment guidelines for sectors requiring high availability, like finance, healthcare, and IoT.
 
-This research will yield both theoretical and practical contributions to fault tolerance in distributed systems:
-
-1. **Improved Fault Isolation:**
-   - Hierarchical supervision enables targeted recovery, reducing the spread of failures.
-2. **Enhanced Resource Efficiency:**
-   - Signal-based monitoring decreases CPU and RAM usage compared to polling mechanisms.
-3. **Scalable Monitoring Framework:**
-   - The supervisory model scales effectively with Kubernetes, aligning with its operational limits.
-4. **Real-World Applicability:**
-   - Deployment guidelines will focus on sectors like **finance**, **healthcare**, and **IoT**, where high availability is critical.
-
-</details>
-
----
-
-<details>
-<summary>🔍 <b>Key Insights</b></summary>
-
-### Insights from Signal-Based Monitoring:
-- **Latency Reduction:** Near-instantaneous failure detection compared to polling delays.
-- **Resource Savings:** Reduced CPU and RAM usage, enabling better scalability.
-- **Fault Containment:** Hierarchical supervision isolates faults, preventing cascading failures.
-- **Real-Time Detection:** Signals enable faster response times than polling intervals allow.
-
-### Broader Implications:
-- Improved resilience in distributed microservices.
-- Practical guidelines for implementing fault-tolerant Kubernetes systems.
-- A foundational framework for future research into cloud-native fault tolerance.
-
-</details>
+### Key Insights:
+- **Faster Detection:** Near-instantaneous failure detection reduces MTTR.
+- **Resource Efficiency:** Significant savings in CPU and RAM usage.
+- **Practical Feasibility:** Demonstrates scalability within Kubernetes’ operational limits.
 
 ---
 
 ## 📧 **Contact**
-For further inquiries or collaborations, please reach out to the author:
+For further inquiries or collaborations, please reach out:
 - **Kyle Thomas**  
 - Email: [2548971t@student.gla.ac.uk](mailto:2548971t@student.gla.ac.uk)  
 
